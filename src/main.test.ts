@@ -1,4 +1,4 @@
-import themePlugin, { tokenSplit } from './index';
+import themePlugin, { tokenSplit } from './main';
 import { describe, expect, test } from "@jest/globals";
 
 const tokens = {

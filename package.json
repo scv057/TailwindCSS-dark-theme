@@ -1,11 +1,12 @@
 {
-  "name": "tailwind-dark-theme",
+  "name": "@andrew_xie/tailwind-dark-theme",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.ts",
   "scripts": {
     "test": "jest",
-    "build": "tsc src/index.ts"
+    "build": "tsc",
+    "publish": "npm publish --access public"
   },
   "keywords": [],
   "author": "",

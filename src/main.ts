@@ -28,7 +28,7 @@ export function tokenSplit(tokens: ITokens): [ITheme, Partial<Config>] {
   return [cssVariable, themeExtend];
 }
 
-function themePlugin<T>(tokens: T, tokenSplitter: (tokens: T) => [ITheme, Partial<Config>]){
+function themePlugin<T>(tokens: T, tokenSplitter: (tokens: T) => [ITheme, Partial<Config>]=tokenSplit){
 // function themePlugin(tokens: ITokens, tokenSplitter:(tokens: ITokens)=>[ITheme, Partial<Config>] = tokenSplit) {
   const [cssVariable, themeExtend] = tokenSplitter(tokens)
 
