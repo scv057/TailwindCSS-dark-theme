@@ -31,9 +31,10 @@ export function tokenSplit(tokens: ITokens): [ITheme, Partial<Config>] {
 
 /**
  * @param tokens
- * @description syntax highlighting is lost for dynamically generated configurations; you can manually add it.
+ * @description autocompleting is lost for dynamically generated configurations;
+ * If that bothers a lot, you may manually generate theme extends and applying them as a temporary fix.
  */
-function genThemeExtend(tokens: ITokens): Partial<Config> {
+export function genThemeExtend(tokens: ITokens): Partial<Config> {
   const themeExtend = {theme: {extend: {colors: {}}}};
   for (const key in tokens) {
     const [ theme, scenes, category, ...padding ] = key.split("-");
@@ -43,7 +44,7 @@ function genThemeExtend(tokens: ITokens): Partial<Config> {
   return themeExtend;
 }
 
-function genCssVariable(tokens: ITokens): ITheme {
+export function genCssVariable(tokens: ITokens): ITheme {
   const cssVariable: ITheme = {'.light': {}, ".dark": {}};
 
   for (let key in tokens) {
@@ -83,5 +84,4 @@ function themePlugin<T>(tokens: T, tokenSplitter: (tokens: T) => [ ITheme, Parti
   }, themeExtend);
 }
 
-export const tools = {genThemeExtend, genCssVariable};
 export default themePlugin;
