@@ -1,26 +1,32 @@
 # Tailwind Dark Theme
 
-A plugin for tailwind CSS that helps you build dark theme
+
+A Tailwind CSS plugin designed to assist you in swiftly creating your own dark theme. The underlying technique is 
+quite straightforward: convert your tokens into CSS variables and apply them to two classes each paired color has same variable names.
 
 ---
 
 ### Installation
 
----
 install the plugin from npm:
 
 ```shell
-npm install @andrew_xie/dark-theme
+npm i @andrew_xie/tailwind-dark-theme
 ```
+---
 
-### Usage
+### docs
+
+[doc_zh](https://github.com/scv057/TailwindCSS-dark-theme/blob/main/doc/README_zh.md)
 
 ---
+
+### Usage
 
 ```javascript
 import themePlugin from '@andrew_xie/tailwind-dark-theme';
 
-// define your own tokens from designer or someone
+// your own design tokens
 const tokens = {
   "light-font-color": "black",
   "light-background-color": "white",
@@ -47,9 +53,7 @@ const tokens = {
 /**
  * @param tokens: Object
  * @return [cssVariable, themeExtend]
- * @description define your own tokenSplit that return
- * cssVariable like{ ".dark": {"--font-color": "#FFF", ...}}
- * themeExtend line {theme: {extend: { ... }}}
+ * @description convert your token to valid CSSrule Object and tailwind theme config object
  */
 function tokenSplit(tokens) {
   // ...
@@ -58,7 +62,7 @@ function tokenSplit(tokens) {
 module.exports = {
   darkMode: 'class',
   plugins: [
-    themePlugin(tokens, tokenSplit || DEFAULT),
+    themePlugin(tokens, tokenSplit || "DEFAULT"),
   ],
 }
 ```
@@ -82,7 +86,7 @@ in HTML
 const Demo = () => {
   const [ theme, setTheme ] = useState('light');
 
-  //  mount cssVariable at root and curent theme
+  //  add tailwind class name
   return <body class={ `light:light dark:dark ${ theme }` }>
   <div class={ "link" }>
     wrapped in utilities
@@ -99,3 +103,7 @@ const Demo = () => {
 
 ---
  todo
+
+### End
+
+If you have any questions feel, free to open an issue.

@@ -1,26 +1,30 @@
-# Tailwind Dark Theme
+# Tailwind 暗黑模式
 
- tailwind CSS Plugin 帮助构建暗黑模式
+一个tailwind插件帮助你快速构建你自己的暗黑模式。其背后的技术其实非常简单，把你的design token转化为css变量，每对颜色css变量名一样，然后将其分别挂载在不同的类下面。
 
 ---
 
 ### 安装
 
----
 install the plugin from npm:
 
 ```shell
-npm install @andrew_xie/dark-theme
+npm i @andrew_xie/tailwind-dark-theme
 ```
+---
 
-### 使用方法
+### 文档
+
+[doc_zh](https://github.com/scv057/TailwindCSS-dark-theme/blob/main/doc/README_zh.md)
 
 ---
+
+### 使用说明
 
 ```javascript
 import themePlugin from '@andrew_xie/tailwind-dark-theme';
 
-// 获取你自己的design tokens
+// your own design tokens
 const tokens = {
   "light-font-color": "black",
   "light-background-color": "white",
@@ -47,9 +51,7 @@ const tokens = {
 /**
  * @param tokens: Object
  * @return [cssVariable, themeExtend]
- * @description define your own tokenSplit that return
- * cssVariable like{ ".dark": {"--font-color": "#FFF", ...}}
- * themeExtend line {theme: {extend: { ... }}}
+ * @description convert your token to valid CSSrule Object and tailwind theme config object
  */
 function tokenSplit(tokens) {
   // ...
@@ -58,7 +60,7 @@ function tokenSplit(tokens) {
 module.exports = {
   darkMode: 'class',
   plugins: [
-    themePlugin(tokens, tokenSplit || DEFAULT),
+    themePlugin(tokens, tokenSplit || "DEFAULT"),
   ],
 }
 ```
@@ -82,7 +84,7 @@ in HTML
 const Demo = () => {
   const [ theme, setTheme ] = useState('light');
 
-  //  mount cssVariable at root and curent theme
+  //  add tailwind class name
   return <body class={ `light:light dark:dark ${ theme }` }>
   <div class={ "link" }>
     wrapped in utilities
@@ -95,7 +97,11 @@ const Demo = () => {
 };
 ```
 
-### 配置
+### Configuration
 
 ---
-建设中
+todo
+
+### End
+
+如果你有任何问题，欢迎开issue来讨论。
