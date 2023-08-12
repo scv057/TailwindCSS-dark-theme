@@ -1,6 +1,6 @@
 {
   "name": "@andrew_xie/tailwind-dark-theme",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A plugin for tailwind CSS that helps you build dark theme",
   "main": "src/main.ts",
   "scripts": {
