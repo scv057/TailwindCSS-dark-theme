@@ -24,7 +24,7 @@ npm i @andrew_xie/tailwind-dark-theme
 ### Usage
 
 ```javascript
-import themePlugin from '@andrew_xie/tailwind-dark-theme';
+import themePlugin, {registerThemeVariant} from '@andrew_xie/tailwind-dark-theme';
 
 // your own design tokens
 const tokens = {
@@ -59,6 +59,9 @@ function tokenSplit(tokens) {
   // ...
 }
 
+// add yourown theme variant and use it like `dark:`
+registerThemeVariant('light');
+
 module.exports = {
   darkMode: 'class',
   plugins: [
@@ -87,12 +90,15 @@ const Demo = () => {
   const [ theme, setTheme ] = useState('light');
 
   //  add tailwind class name
-  return <body class={ `light:light dark:dark ${ theme }` }>
+  return <body class={ `${ theme }` }>
   <div class={ "link" }>
     wrapped in utilities
   </div>
   <div class={ "text-link-color" }>
     directly using
+  </div>
+  <div class={"light:text-red"}>
+    you may want use theme-variant to control style in some situations, you can add your own theme-variant  
   </div>
   <button onclick={ setTheme('dark') }>theme</button>
   </body>
