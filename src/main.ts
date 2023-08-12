@@ -55,13 +55,30 @@ function genCssVariable(tokens: ITokens): ITheme {
   return cssVariable
 }
 
-function themePlugin<T>(tokens: T, tokenSplitter: (tokens: T) => [ITheme, Partial<Config>]=tokenSplit){
-// function themePlugin(tokens: ITokens, tokenSplitter:(tokens: ITokens)=>[ITheme, Partial<Config>] = tokenSplit) {
-  const [cssVariable, themeExtend] = tokenSplitter(tokens)
+export function registerThemeVariant(themeName: string) {
+  return function ({addVariant, config}) {
+    const darkMode: [ string, string ] | string = config("darkMode");
+    let selector: string = "";
 
-  // TODO: get config
-  return plugin(function ({addVariant, addUtilities, config}) {
-    addVariant('light', [ '.light &' ]);
+    if (darkMode instanceof Array) {
+      let s = darkMode[1];
+      selector = `:is(${ s.replace(/dark/, themeName) } &)`;
+    } else {
+      if (darkMode === "class") {
+        selector = `:is(.${ themeName } &)`
+      } else if (darkMode === "media") {
+        selector = `@media (prefers-color-scheme: ${ themeName })`
+      }
+    }
+    addVariant(themeName, [ selector ]);
+  }
+}
+
+function themePlugin<T>(tokens: T, tokenSplitter: (tokens: T) => [ ITheme, Partial<Config> ] = tokenSplit) {
+// function themePlugin(tokens: ITokens, tokenSplitter:(tokens: ITokens)=>[ITheme, Partial<Config>] = tokenSplit) {
+  const [ cssVariable, themeExtend ] = tokenSplitter(tokens)
+
+  return plugin(function ({addUtilities}) {
     addUtilities(cssVariable)
   }, themeExtend);
 }
